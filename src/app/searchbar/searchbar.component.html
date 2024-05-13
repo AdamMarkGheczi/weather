@@ -1,0 +1,15 @@
+<form [formGroup] = "formGroup" (keydown.enter)="onEnterKeyPressed()">
+    <mat-form-field>
+        <div class="input-group">
+            <input formControlName="CityName" matInput type="text" [matAutocomplete]="auto" placeholder="City name" required="true" >
+            <input type="button" value="Search" (click)="handleSearchButtonClick()">
+        </div>
+        <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let city of cities" [value]="city.name + ', ' + city.region">
+                {{city.name}}, {{city.region}}
+            </mat-option>
+        </mat-autocomplete>
+    
+    </mat-form-field>
+</form>
+
