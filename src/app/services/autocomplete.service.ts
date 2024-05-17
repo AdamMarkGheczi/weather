@@ -14,8 +14,8 @@ export class AutocompleteService {
     return this.apiService.getSearchSuggestions(query).pipe(
       map(response => {
         return response.map(cityData => {
-          const { name, region } = cityData;
-          return { name, region } as City;
+          const { name, region, id } = cityData;
+          return { name, region, id } as City;
         });
       })
     )

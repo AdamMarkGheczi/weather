@@ -6,7 +6,8 @@ import { MatInputModule} from '@angular/material/input';
 import { MatAutocompleteModule} from '@angular/material/autocomplete';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
-
+import { Router } from '@angular/router';
+import { CitypageComponent } from '../citypage/citypage.component';
 
 @Component({
   selector: 'searchbar',
@@ -23,9 +24,9 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
 export class SearchbarComponent implements OnInit {
   constructor(
     private autoComplete: AutocompleteService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router
   ) {};
-  
   
   formGroup: FormGroup = this.formBuilder.group({
     'CityName' : ['']
@@ -33,11 +34,10 @@ export class SearchbarComponent implements OnInit {
 
   cities: City[] = [];
 
-
   initFormAutoComplete() {
     this.formGroup.get('CityName')?.valueChanges.pipe(
       debounceTime(300),
-      distinctUntilChanged()
+      distinctUntilChanged(),
     )
     .subscribe((value) => {
       if(!!value === false) 
@@ -53,19 +53,24 @@ export class SearchbarComponent implements OnInit {
     this.initFormAutoComplete();  
   }
 
-  routeToWeatherPage() {
-    console.log('Routing');
+  handleSearchButtonClick() {
+    let query = this.formGroup.get('CityName')?.value;
+    if (query !== '') {
+      let selectedCityId = this.cities.find(city => `${city.name}, ${city.region}` === query)?.id;
+
+      if(!!selectedCityId) {
+        this.routeToWeatherPage(`id:${selectedCityId}`);
+      } else{
+        this.routeToWeatherPage(query);
+      }
+    }
   }
 
-  onEnterKeyPressed() {
-    if (!!this.formGroup.get('CityName')?.value == true)
-      this.routeToWeatherPage();
+
+  routeToWeatherPage(queryParam: string) {
+    this.router.navigate(['/city/', queryParam]);
   }
   
-  handleSearchButtonClick() {
-    if (!!this.formGroup.get('CityName')?.value == true)
-      this.routeToWeatherPage();
-  }
 
   
 }

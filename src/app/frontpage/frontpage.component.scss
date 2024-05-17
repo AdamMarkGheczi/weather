@@ -11,6 +11,7 @@ h1 {
     position: absolute;
     left: 50%;
     transform: translate(-50%);
+    color: white;
 }
 
 div {
@@ -20,4 +21,15 @@ div {
     // justify-content: center;
     // border-width: 2px;
     // border-style: solid;
+}
+
+searchbar {
+    flex-grow: 1;
+}
+
+main {
+    background-color: #555555;
+    background-image: url("https://i.pinimg.com/originals/65/3f/29/653f2901d73984f72dd055f42b495ffa.jpg");
+    // background-blend-mode: multiply;
+    background-size: cover;
 }

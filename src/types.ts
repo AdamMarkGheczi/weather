@@ -1,6 +1,7 @@
 export interface City {
     name: string,
-    region: string
+    region: string,
+    id: number
 }
 
 export interface SearchInfo{

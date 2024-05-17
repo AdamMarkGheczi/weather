@@ -14,12 +14,7 @@ export class ApiService {
     private httpClient: HttpClient
   ) { }
 
-// https://api.weatherapi.com/v1/current.json?q=diosi&lang=hu&key=826ebfec371d456a88f85216241105
-
-
   private baseUrl = `https://api.weatherapi.com/v1`;
-  
-  
   
   getSearchSuggestions(q:string): Observable<City[]> {
     let requestUrl = `${this.baseUrl}/search.json?key=${environment.API_KEY}&q=${q}`;
