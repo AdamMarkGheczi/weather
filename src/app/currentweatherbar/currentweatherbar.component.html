@@ -1,0 +1,13 @@
+<div class="current-weather-box">
+    <img src="{{currentWeatherObject.condition.icon}}">
+    <span class="primary-info"><span class="data">{{currentWeatherObject.temp_c}} °C</span></span>
+
+    <div class="secondary-info">
+        <span>Precipitation: <span class="data">{{currentWeatherObject.precip_mm}} mm</span></span>
+        <span>Humidity: <span class="data">{{currentWeatherObject.humidity}} %</span></span>
+        <span>Wind: <span class="data">{{currentWeatherObject.wind_kph}} km/h {{currentWeatherObject.wind_dir}}</span></span>
+    </div>
+    <div class="tertiary-info data">
+        {{currentWeatherObject.last_updated | date: 'EEEE H:mm'}}
+    </div>
+</div>

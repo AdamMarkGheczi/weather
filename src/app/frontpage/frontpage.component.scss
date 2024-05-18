@@ -5,6 +5,9 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: #457f8a;
+    background-image: url("../../assets/background-image.jpg");
+    background-size: cover;
 }
 
 h1 {
@@ -25,11 +28,4 @@ div {
 
 searchbar {
     flex-grow: 1;
-}
-
-main {
-    background-color: #555555;
-    background-image: url("https://i.pinimg.com/originals/65/3f/29/653f2901d73984f72dd055f42b495ffa.jpg");
-    // background-blend-mode: multiply;
-    background-size: cover;
 }

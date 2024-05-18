@@ -1,0 +1,19 @@
+<mat-card (click) = "click()">
+    <mat-card-subtitle class="clickDetailText">Click for detailed view</mat-card-subtitle>
+    <mat-card-header>
+      <img mat-card-avatar src="{{dailyWeatherObject.condition.icon}}">
+      <mat-card-title>{{dailyWeatherObject.date| date: 'EEEE'}}</mat-card-title>
+      <mat-card-subtitle>{{dailyWeatherObject.condition.text}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <h1>{{dailyWeatherObject.avgtemp_c}} °C</h1>
+      <p>Average humidity: {{dailyWeatherObject.avghumidity}} %</p>
+      <p>Chance of rain: {{dailyWeatherObject.daily_chance_of_rain}} %</p>
+      <p>Total precipitation: {{dailyWeatherObject.totalprecip_mm}} mm</p>
+      <div *ngIf="dailyWeatherObject.daily_chance_of_snow != 0">
+        <p>Chance of snow: {{dailyWeatherObject.daily_chance_of_snow}} %</p>
+        <p>Total snow: {{dailyWeatherObject.totalsnow_cm}} cm</p>
+      </div>
+    </mat-card-content>
+
+</mat-card>

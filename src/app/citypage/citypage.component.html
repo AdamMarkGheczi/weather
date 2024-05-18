@@ -1,1 +1,11 @@
-<p>{{data}}</p>
+<main>
+    <h1 *ngIf="cityNotFound && response" class="not-found-warning">City not found</h1>
+
+    <div class="weather-display" *ngIf="!cityNotFound && response">
+        <app-currentweatherbar [currentWeatherObject] = 'response.current'></app-currentweatherbar>
+    
+        <div class="card-container">
+            <app-weathercard *ngFor="let dailyWeather of response.forecast" [dailyWeatherObject]="dailyWeather.day"></app-weathercard>
+        </div>
+    </div>
+</main>

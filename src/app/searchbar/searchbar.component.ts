@@ -7,7 +7,6 @@ import { MatAutocompleteModule} from '@angular/material/autocomplete';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { Router } from '@angular/router';
-import { CitypageComponent } from '../citypage/citypage.component';
 
 @Component({
   selector: 'searchbar',
@@ -66,11 +65,9 @@ export class SearchbarComponent implements OnInit {
     }
   }
 
-
   routeToWeatherPage(queryParam: string) {
     this.router.navigate(['/city/', queryParam]);
   }
   
 
-  
 }

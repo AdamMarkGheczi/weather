@@ -1,0 +1,48 @@
+.current-weather-box {
+    color: rgb(65, 65, 65);
+    display: grid;
+    grid-template-columns: 1fr 3fr 4fr 4fr;
+    grid-template-areas: "icon primary secondary tertiary";
+    background-color: rgba($color: white, $alpha: 0.9);
+    border-radius: 5px;
+    margin-top: 3em;
+    align-items: center;
+    padding: 10px;
+}
+
+img {
+    grid-area: icon;
+}
+
+.primary-info {
+    font-size: xx-large;
+    grid-area: primary;
+}
+
+.secondary-info {
+    display: flex;
+    flex-direction: column;
+    font-size: large;
+    grid-area: secondary;
+}
+
+.tertiary-info {
+    text-align: center;
+    font-size: xx-large;
+    grid-area: tertiary;
+}
+
+@media screen and (max-width: 600px) {
+    .current-weather-box {
+        grid-template-columns: 1fr 2fr;
+        grid-template-areas:
+            "icon tertiary"
+            "primary secondary";
+
+        justify-items: center;
+    }
+}
+
+.data {
+    color: rgb(0, 116, 151);
+}
