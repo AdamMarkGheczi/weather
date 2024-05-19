@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { Observable, map } from 'rxjs';
-import { ApiErrorObject, LargeApiReturnObject, ServiceReturnObject } from '../../types';
+import { ApiErrorObject, HourWeather, LargeApiReturnObject, ServiceReturnObject } from '../../types';
 
 @Injectable({
   providedIn: 'root'
@@ -16,10 +16,14 @@ export class CityweatherService {
     let forecastArray = apiObject.forecast.forecastday.map( (f) => {
       let obj = {
         day: Object.assign({date: f.date}, f.day),
-        hour: f.hour
+        hour: f.hour.map((snapshot:HourWeather) => {
+          let temp:HourWeather = snapshot;
+          temp.condition.icon = '../../assets' + temp.condition.icon.split('.com')[1];
+          return temp;
+        })
       };
       
-      obj.day.condition.icon = obj.day.condition.icon = '../../assets' +  obj.day.condition.icon.split('.com')[1]; 
+      obj.day.condition.icon = '../../assets' +  obj.day.condition.icon.split('.com')[1]; 
       return obj;
     }
     )

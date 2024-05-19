@@ -1,0 +1,62 @@
+<!-- <p>{{hourTable[0].time | date: 'EEEE'}}</p> -->
+<table mat-table [dataSource]="hourTable">
+    <ng-container matColumnDef="time">
+        <th mat-header-cell *matHeaderCellDef >Time</th>
+        <td mat-cell *matCellDef="let element">{{element.time | date: 'HH:mm'}}</td>
+    </ng-container>
+    <ng-container matColumnDef="icon">
+        <th mat-header-cell *matHeaderCellDef ></th>
+        <td mat-cell *matCellDef="let element"><img src="{{element.condition.icon}}"></td>
+    </ng-container>
+    <ng-container matColumnDef="condition">
+        <th mat-header-cell *matHeaderCellDef >Condition</th>
+        <td mat-cell *matCellDef="let element">{{element.condition.text}}</td>
+    </ng-container>
+    <ng-container matColumnDef="temp_c">
+        <th mat-header-cell *matHeaderCellDef >Temperature</th>
+        <td mat-cell *matCellDef="let element">{{element.temp_c}} °C</td>
+    </ng-container>
+    <ng-container matColumnDef="feelslike_c">
+        <th mat-header-cell *matHeaderCellDef >Feels like</th>
+        <td mat-cell *matCellDef="let element">{{element.feelslike_c}} °C</td>
+    </ng-container>
+    <ng-container matColumnDef="humidity">
+        <th mat-header-cell *matHeaderCellDef >Humidity</th>
+        <td mat-cell *matCellDef="let element">{{element.humidity}} %</td>
+    </ng-container>
+    <ng-container matColumnDef="chance_of_rain">
+        <th mat-header-cell *matHeaderCellDef >Chance of rain</th>
+        <td mat-cell *matCellDef="let element">{{element.chance_of_rain}} %</td>
+    </ng-container>
+    <ng-container matColumnDef="precip_mm">
+        <th mat-header-cell *matHeaderCellDef >Precipitation</th>
+        <td mat-cell *matCellDef="let element">{{element.precip_mm}} mm</td>
+    </ng-container>
+    <ng-container matColumnDef="chance_of_snow">
+        <th mat-header-cell *matHeaderCellDef >Chance of snow</th>
+        <td mat-cell *matCellDef="let element">{{element.chance_of_snow}} %</td>
+    </ng-container>
+    <ng-container matColumnDef="wind_kph">
+        <th mat-header-cell *matHeaderCellDef >Windspeed</th>
+        <td mat-cell *matCellDef="let element">{{element.wind_kph}} km/h</td>
+    </ng-container>
+    <ng-container matColumnDef="wind_dir">
+        <th mat-header-cell *matHeaderCellDef >Wind direction</th>
+        <td mat-cell *matCellDef="let element">{{element.wind_dir}}</td>
+    </ng-container>
+    <ng-container matColumnDef="uv">
+        <th mat-header-cell *matHeaderCellDef >UV</th>
+        <td mat-cell *matCellDef="let element">{{element.uv}}</td>
+    </ng-container>
+    
+<!-- 
+  ['time', 'icon', 'condition', 'temp_c', 'feelslike_c', 'humidity', 'chance_of_rain', 'precip_mm', 'chance_of_snow', 'wind_kph', 'wind_dir', 'uv'];
+
+ -->
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+</table>
+  
+  

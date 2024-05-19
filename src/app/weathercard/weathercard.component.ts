@@ -16,8 +16,4 @@ import { DailyAverageWithDate } from '../../types';
 })
 export class WeathercardComponent {
   @Input({required: true}) dailyWeatherObject!: DailyAverageWithDate;
-
-  click() {
-    console.log("I HAVE BEEN CLICKED");
-  }
 }

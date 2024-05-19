@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { WeathercardComponent } from '../weathercard/weathercard.component';
 import { CurrentweatherbarComponent } from '../currentweatherbar/currentweatherbar.component';
-import { ServiceReturnObject } from '../../types';
+import { HourWeather, ServiceReturnObject } from '../../types';
 import { CityweatherService } from '../services/cityweather.service';
 import { NgIf, NgFor } from '@angular/common';
+import { HourweathertableComponent } from '../hourweathertable/hourweathertable.component';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-citypage',
@@ -12,6 +14,8 @@ import { NgIf, NgFor } from '@angular/common';
   imports: [
     WeathercardComponent,
     CurrentweatherbarComponent,
+    HourweathertableComponent,
+    MatButtonModule,
     NgIf,
     NgFor
   ],
@@ -39,6 +43,19 @@ export class CitypageComponent implements OnInit {
     this.response = response as ServiceReturnObject;
     if('error'in response) this.cityNotFound = true;
     this.freeToLoad = true;
+  }
+
+  hourViewToggle:boolean = false;
+  
+  hourViewObjectArray?: HourWeather[];
+
+  enableHourView(index:number){
+    this.hourViewToggle = true;
+    this.hourViewObjectArray = this.response?.forecast[index].hour;
+  }
+
+  disableHourView() {
+    this.hourViewToggle = false;
   }
 
 }
