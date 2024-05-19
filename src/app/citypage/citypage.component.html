@@ -4,8 +4,19 @@
     <div class="weather-display" *ngIf="!cityNotFound && response">
         <app-currentweatherbar [currentWeatherObject] = 'response.current' [location] = 'response.location'></app-currentweatherbar>
     
-        <div class="card-container">
-            <app-weathercard *ngFor="let dailyWeather of response.forecast" [dailyWeatherObject]="dailyWeather.day"></app-weathercard>
+        <div class="card-container" *ngIf="!hourViewToggle">
+            <app-weathercard
+                *ngFor="let dailyWeather of response.forecast; index as index"
+                [dailyWeatherObject]="dailyWeather.day"
+                (click) = 'enableHourView(index)'>
+            </app-weathercard>
         </div>
+
+        <div *ngIf="hourViewToggle && hourViewObjectArray">
+            <button mat-button (click) = 'disableHourView()'>Back</button>
+            <app-hourweathertable [hourTable] = "hourViewObjectArray"></app-hourweathertable>
+        </div>
+
+
     </div>
 </main>
