@@ -1,6 +1,7 @@
 export interface City {
     name: string,
     region: string,
+    country: string,
     id: number
 }
 
@@ -59,6 +60,11 @@ export interface DailyAverageWithDate extends DailyAverage{
 }
 
 export interface LargeApiReturnObject {
+    location: {
+        name: string,
+        region: string,
+        country: string
+    },
     current: CurrentWeather,
     forecast: {
         forecastday: {
@@ -70,6 +76,7 @@ export interface LargeApiReturnObject {
 }
 
 export interface ServiceReturnObject {
+    location: string,
     current: CurrentWeather,
     forecast: {
         day: DailyAverageWithDate,

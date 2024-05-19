@@ -13,9 +13,9 @@ import { DatePipe} from '@angular/common';
 })
 export class CurrentweatherbarComponent implements OnInit {
   @Input({required: true}) currentWeatherObject!: CurrentWeather;
+  @Input({required: true}) location!: string;
 
   ngOnInit(): void {
-    console.log(this.currentWeatherObject);
     this.currentWeatherObject.condition.icon = '../../assets' +  this.currentWeatherObject.condition.icon.split('.com')[1]; 
   }
 

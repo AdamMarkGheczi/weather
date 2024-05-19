@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { WeathercardComponent } from '../weathercard/weathercard.component';
 import { CurrentweatherbarComponent } from '../currentweatherbar/currentweatherbar.component';
-import { CurrentWeather, ServiceReturnObject } from '../../types';
+import { ServiceReturnObject } from '../../types';
 import { CityweatherService } from '../services/cityweather.service';
 import { NgIf, NgFor } from '@angular/common';
 
@@ -24,30 +24,14 @@ export class CitypageComponent implements OnInit {
     private cityWeatherService: CityweatherService
   ) {}
 
-  dummycurrentweather: CurrentWeather  = {
-    last_updated: '2024-05-18 18:00',
-    temp_c: 15,
-    feelslike_c: 15,
-    condition: {
-      text: 'sunny',
-      icon: '//cdn.weatherapi.com/weather/64x64/day/116.png',
-    },
-    humidity: 15,
-    wind_kph: 15,
-    wind_dir: 'ENE',
-    precip_mm: 15,
-    uv: 1
-  }
-
-  data = ""
   response: ServiceReturnObject | null = null;
 
   freeToLoad = false;
   cityNotFound = false;
 
   ngOnInit(): void {
-    this.data = this.route.snapshot.params['query'];
-    this.cityWeatherService.getForecast(this.data)
+    let query = this.route.snapshot.params['query'];
+    this.cityWeatherService.getForecast(query)
       .subscribe((response => this.setRepsonse(response)));
   }
 

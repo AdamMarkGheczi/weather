@@ -5,7 +5,7 @@ import { City } from '../../types';
 import { MatInputModule} from '@angular/material/input';
 import { MatAutocompleteModule} from '@angular/material/autocomplete';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { debounceTime, distinctUntilChanged, of, switchMap } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Component({
@@ -37,15 +37,17 @@ export class SearchbarComponent implements OnInit {
     this.formGroup.get('CityName')?.valueChanges.pipe(
       debounceTime(300),
       distinctUntilChanged(),
+      switchMap(value => {
+        if (this.suppressSearch || !value) {
+          this.suppressSearch = false;
+          return of([]);
+        }
+        return this.autoComplete.getMatchingCities(value);
+      })
     )
-    .subscribe((value) => {
-      if(!!value === false) 
-        this.cities = [];
-      else
-        this.autoComplete.getMatchingCities(value)
-        .subscribe((cities => {this.cities = cities}));
+    .subscribe(cities => {
+      this.cities = cities;
     });
-
   }
 
   ngOnInit(): void {
@@ -55,14 +57,20 @@ export class SearchbarComponent implements OnInit {
   handleSearchButtonClick() {
     let query = this.formGroup.get('CityName')?.value;
     if (query !== '') {
-      let selectedCityId = this.cities.find(city => `${city.name}, ${city.region}` === query)?.id;
-
-      if(!!selectedCityId) {
-        this.routeToWeatherPage(`id:${selectedCityId}`);
-      } else{
+      if(this.selectedCity && query == `${this.selectedCity.name}, ${this.selectedCity.region}, ${this.selectedCity.country}`)
+        this.routeToWeatherPage(`id:${this.selectedCity.id}`);
+      else 
         this.routeToWeatherPage(query);
-      }
     }
+  }
+
+  selectedCity?: City | null = null;
+  suppressSearch: boolean = false;
+
+  optionSelected() {
+    this.suppressSearch = true;
+    let query = this.formGroup.get('CityName')?.value;
+    this.selectedCity = this.cities.find(city => `${city.name}, ${city.region}, ${city.country}` === query);
   }
 
   routeToWeatherPage(queryParam: string) {

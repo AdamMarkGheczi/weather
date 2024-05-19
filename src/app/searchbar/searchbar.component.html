@@ -4,12 +4,12 @@
             <input matInput formControlName="CityName" type="text" [matAutocomplete]="auto" placeholder="City name" required >
             <input type="button" value="Search" (click)="handleSearchButtonClick()" >
         </div>
-        <mat-autocomplete #auto="matAutocomplete">
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected) = 'optionSelected()'>
             <mat-option 
                 *ngFor="let city of cities" 
-                [value]="city.name + ', ' + city.region">
+                [value]="city.name + ', ' + city.region + ', ' + city.country">
                 
-                {{city.name}}, {{city.region}}
+                {{city.name}}, {{city.region}}, {{city.country}}
             </mat-option>
         </mat-autocomplete>
     </mat-form-field>

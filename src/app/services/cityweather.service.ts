@@ -11,6 +11,7 @@ export class CityweatherService {
   constructor(private apiService: ApiService) { }
 
   convertToServiceObject(apiObject: LargeApiReturnObject): ServiceReturnObject {
+
     
     let forecastArray = apiObject.forecast.forecastday.map( (f) => {
       let obj = {
@@ -22,8 +23,8 @@ export class CityweatherService {
       return obj;
     }
     )
-    
     return {
+      location: [apiObject.location.name, apiObject.location.region, apiObject.location.country].filter(Boolean).join(", "),
       current: apiObject.current,
       forecast: forecastArray
     };
